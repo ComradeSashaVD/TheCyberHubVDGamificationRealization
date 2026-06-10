@@ -7,25 +7,34 @@
 
 import { describe, it, expect } from 'vitest';
 
-// Mock implementations for testing without full React setup
-// In a real setup, these would use @testing-library/react
+// Единый интерфейс для всех достижений (все поля опциональны, чтобы покрыть и earned, и locked варианты)
+interface Achievement {
+    id: string;
+    name: string;
+    description: string;
+    icon?: string;
+    tier?: 'bronze' | 'silver' | 'gold' | 'platinum';
+    earnedAt?: string;     // присутствует у полученных достижений
+    progress?: number;     // присутствует у недостигнутых с прогрессом
+    requirement?: string;  // дополнительная информация о требовании
+}
 
 describe('AchievementBadge Component', () => {
-    const mockEarnedAchievement = {
+    const mockEarnedAchievement: Achievement = {
         id: '1',
         name: 'First Blood',
         description: 'Solve your first challenge',
         icon: 'first_solve',
-        tier: 'bronze' as const,
+        tier: 'bronze',
         earnedAt: '2024-01-15T10:00:00Z',
     };
 
-    const mockLockedAchievement = {
+    const mockLockedAchievement: Achievement = {
         id: '2',
         name: 'Challenge Master',
         description: 'Solve 50 challenges',
         icon: 'challenge_master',
-        tier: 'gold' as const,
+        tier: 'gold',
         progress: 60,
         requirement: 'Solve 50 challenges (30/50)',
     };
@@ -44,7 +53,7 @@ describe('AchievementBadge Component', () => {
         });
 
         it('should differentiate earned vs locked badges', () => {
-            const isEarned = (badge: typeof mockEarnedAchievement | typeof mockLockedAchievement) =>
+            const isEarned = (badge: Achievement) =>
                 'earnedAt' in badge && badge.earnedAt !== undefined;
 
             expect(isEarned(mockEarnedAchievement)).toBe(true);
@@ -89,7 +98,7 @@ describe('AchievementBadge Component', () => {
 });
 
 describe('AchievementGrid Component', () => {
-    const mockAchievements = [
+    const mockAchievements: Achievement[] = [
         { id: '1', name: 'Badge 1', description: 'Test', earnedAt: '2024-01-01' },
         { id: '2', name: 'Badge 2', description: 'Test', earnedAt: '2024-02-01' },
         { id: '3', name: 'Badge 3', description: 'Test', progress: 50 },
@@ -113,7 +122,7 @@ describe('AchievementGrid Component', () => {
     });
 
     it('should handle empty achievements array', () => {
-        const emptyAchievements: typeof mockAchievements = [];
+        const emptyAchievements: Achievement[] = [];
         expect(emptyAchievements).toHaveLength(0);
     });
 });
