@@ -21,6 +21,7 @@ const parseBearerPayload = (token: string): RequestUser | null => {
     }
 };
 
+
 export const getRequestUser = (request: NextRequest): RequestUser | null => {
     const explicitId = request.headers.get('x-user-id');
     if (explicitId) {

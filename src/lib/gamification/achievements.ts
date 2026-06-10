@@ -1,5 +1,6 @@
 import { AchievementDefinition } from '@/types/gamification';
 
+
 export const ACHIEVEMENTS: AchievementDefinition[] = [
     { id: 'a1', key: 'ctf_novice', name: 'CTF Novice', description: 'Solve 5 CTF challenges', icon: 'flag', tier: 'common', category: 'ctf', xpReward: 40, requirementType: 'ctf_solves', requirementValue: 5, nextKey: 'ctf_expert' },
     { id: 'a2', key: 'ctf_expert', name: 'CTF Expert', description: 'Solve 25 CTF challenges', icon: 'trophy', tier: 'rare', category: 'ctf', xpReward: 80, requirementType: 'ctf_solves', requirementValue: 25, nextKey: 'ctf_master' },

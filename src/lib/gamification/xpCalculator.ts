@@ -10,6 +10,7 @@ export interface LevelState {
     progressPercent: number;
 }
 
+
 export const xpRequiredForLevel = (level: number): number => {
     if (level <= 1) return 0;
     let sum = 0;

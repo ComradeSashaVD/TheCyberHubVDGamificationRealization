@@ -14,6 +14,7 @@ import {
     XpHistoryEntry,
 } from '@/types/gamification';
 
+
 type UserStats = Record<string, number>;
 
 const profiles = new Map<string, GamificationProfile>();
